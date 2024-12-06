@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <input id="a" type="text">
+    <input id="b" type="text">
+
+    <button onclick="getSum()">get the sum</button>
+    <div id="c"></div>
+
+    <script>
+        async function getSum() {
+            const a = document.getElementById("a").value;
+            const b = document.getElementById("b").value;
+            fetch ("http://localhost:3000/sum",{
+                method:"post",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(
+                    {
+                    a:a,
+                    b:b
+                }
+                )
+            }).then(
+                res => res.json()
+            ).then(
+                res => {
+                console.log(res)
+                document.getElementById("c").innerHTML =JSON.stringify(res.c)
+                }
+            )
+        }
+    </script>
+
+</body>
+</html>
